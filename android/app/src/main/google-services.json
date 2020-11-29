@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "777682735881",
+    "firebase_url": "https://persionalfinacialmanagement.firebaseio.com",
+    "project_id": "persionalfinacialmanagement",
+    "storage_bucket": "persionalfinacialmanagement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777682735881:android:44fc99d5647c64e9a079d8",
+        "android_client_info": {
+          "package_name": "com.example.personal_financial_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777682735881-98atoll6dbors33i0cutdge7pv5dt2ed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFDcl6HvC2r49C-9ByDe0JCOl_gd6rUsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777682735881-98atoll6dbors33i0cutdge7pv5dt2ed.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
