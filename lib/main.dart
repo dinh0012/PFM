@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:personal_financial_management/models/select_item.dart';
-import 'package:personal_financial_management/widgets/field.dart';
-import 'package:personal_financial_management/widgets/field_type.dart';
-import 'package:personal_financial_management/widgets/form_custom.dart';
-import 'firestoreservice.dart';
+import 'package:personal_financial_management/pages/setting-form.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:personal_financial_management/services/firestoreservice.dart';
 import 'taskscreen.dart';
 import 'task.dart';
 
@@ -66,38 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 80,
             padding: EdgeInsets.all(16.0),
-            child: FormCustom(
-              initialValues: {'a': '12345', 'a2': '2'},
-              children: (values, initialValues) => [
-                Field(
-                    type: FieldType.inputMoney,
-                    labelText: 'cố định',
-                    name: 'a',
-                    initialValue: initialValues['a'],
-                    onSaved: (userName) {
-                      values['a'] = userName;
-                    }),
-                Field(
-                    type: FieldType.selection,
-                    labelText: 'cố định 2',
-                    initialValue: initialValues['a2'],
-                    name: 'a2',
-                    items: [
-                      new SelectItem(label: 'Label 1', value: '1'),
-                      new SelectItem(label: 'Label 2', value: '2'),
-                      new SelectItem(label: 'Label 3', value: '3'),
-                      new SelectItem(label: 'Label 4', value: '4'),
-                      new SelectItem(label: 'Label 5', value: '5'),
-                    ],
-                    onSaved: (value) {
-                      values['a2'] = value;
-                    }),
-                Field(
-                    type: FieldType.input,
-                    labelText: 'cố định 3',
-                    name: 'a3'),
-              ],
-            ),
+            child: SettingForm(),
           ),
         ],
       ),

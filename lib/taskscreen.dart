@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:personal_financial_management/services/firestoreservice.dart';
 import 'task.dart';
-import 'firestoreservice.dart';
 
 class TaskScreen extends StatefulWidget {
   final Task task;

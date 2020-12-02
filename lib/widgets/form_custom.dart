@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:personal_financial_management/widgets/field.dart';
 class FormCustom extends StatefulWidget {
   final Function children ;
+  final Function(Map<String, dynamic>) onSaved ;
   final Map initialValues;
 
-  FormCustom({this.children, this.initialValues });
+  FormCustom({this.children, this.initialValues, this.onSaved });
 
   @override
   _FormFieldState createState() => _FormFieldState();
@@ -13,10 +14,9 @@ class FormCustom extends StatefulWidget {
 
 class _FormFieldState extends State<FormCustom> {
   final GlobalKey _formKey = GlobalKey();
-  final Map values = new Map();
+  final Map<String, dynamic> values = new Map();
   @override
   Widget build(BuildContext context) {
-    print(values);
     var initialValues = widget.initialValues;
     return Container(
       child: Form(
@@ -38,10 +38,10 @@ class _FormFieldState extends State<FormCustom> {
 
   void _submitForm() {
     final FormState form = _formKey.currentState;
-    print(values);
     if (form.validate()) {
       form.save();
       print('New user saved with signup data:\n');
+      widget.onSaved(values);
       print(values);
     }
   }
