@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:personal_financial_management/widgets/field.dart';
+import 'package:personal_financial_management/widgets/field_type.dart';
+import 'package:personal_financial_management/widgets/form_custom.dart';
 import 'firestoreservice.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'taskscreen.dart';
@@ -61,67 +64,28 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 80,
-            child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return Stack(children: <Widget>[
-                    // The containers in the background
-                    Column(children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 80.0,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                            child: Material(
-                              color: Colors.white,
-                              elevation: 14.0,
-                              shadowColor: Color(0x802196F3),
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      todoType('${items[index].tasktype}'),
-                                      Text(
-                                        '${items[index].taskname}',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20.0),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text(
-                                            '${items[index].taskdate}',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 18.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            '${items[index].tasktime}',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16.0),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ]);
-                }),
+            padding: EdgeInsets.all(16.0),
+            child: FormCustom(
+              initialValues: {'a': 'adad'},
+              children: (values, initialValues) => [
+                Field(
+                    type: FieldType.input,
+                    labelText: 'Tiền lương cố định',
+                    name: 'a',
+                    initialValue: initialValues['a'],
+                    onSaved: (userName) {
+                      values['a'] = userName;
+                    }),
+                Field(
+                    type: FieldType.selection,
+                    labelText: 'Tiền lương cố định 2',
+                    name: 'a2'),
+                Field(
+                    type: FieldType.input,
+                    labelText: 'Tiền lương cố định 3',
+                    name: 'a3'),
+              ],
+            ),
           ),
         ],
       ),
@@ -131,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           FontAwesomeIcons.listUl,
           color: Color(0xFFFDDE42),
         ),
+
         onPressed: () {
           //Navigator.push(context,MaterialPageRoute(builder: (context) => TaskScreen()),
           Navigator.push(
