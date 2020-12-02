@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:personal_financial_management/models/select_item.dart';
 import 'package:personal_financial_management/widgets/field.dart';
 import 'package:personal_financial_management/widgets/field_type.dart';
 import 'package:personal_financial_management/widgets/form_custom.dart';
@@ -66,11 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
             height: MediaQuery.of(context).size.height - 80,
             padding: EdgeInsets.all(16.0),
             child: FormCustom(
-              initialValues: {'a': 'adad'},
+              initialValues: {'a': '12345', 'a2': '2'},
               children: (values, initialValues) => [
                 Field(
-                    type: FieldType.input,
-                    labelText: 'Tiền lương cố định',
+                    type: FieldType.inputMoney,
+                    labelText: 'cố định',
                     name: 'a',
                     initialValue: initialValues['a'],
                     onSaved: (userName) {
@@ -78,11 +79,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     }),
                 Field(
                     type: FieldType.selection,
-                    labelText: 'Tiền lương cố định 2',
-                    name: 'a2'),
+                    labelText: 'cố định 2',
+                    initialValue: initialValues['a2'],
+                    name: 'a2',
+                    items: [
+                      new SelectItem(label: 'Label 1', value: '1'),
+                      new SelectItem(label: 'Label 2', value: '2'),
+                      new SelectItem(label: 'Label 3', value: '3'),
+                      new SelectItem(label: 'Label 4', value: '4'),
+                      new SelectItem(label: 'Label 5', value: '5'),
+                    ],
+                    onSaved: (value) {
+                      values['a2'] = value;
+                    }),
                 Field(
                     type: FieldType.input,
-                    labelText: 'Tiền lương cố định 3',
+                    labelText: 'cố định 3',
                     name: 'a3'),
               ],
             ),
@@ -95,7 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
           FontAwesomeIcons.listUl,
           color: Color(0xFFFDDE42),
         ),
-
         onPressed: () {
           //Navigator.push(context,MaterialPageRoute(builder: (context) => TaskScreen()),
           Navigator.push(

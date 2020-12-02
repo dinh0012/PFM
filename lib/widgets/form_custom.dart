@@ -21,7 +21,6 @@ class _FormFieldState extends State<FormCustom> {
     return Container(
       child: Form(
         key: _formKey,
-        autovalidate: true,
         child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: [
@@ -29,7 +28,7 @@ class _FormFieldState extends State<FormCustom> {
               FlatButton(
                 onPressed: _submitForm,
                 child: Icon(
-                  Icons.check,
+                  Icons.access_alarm,
                 ),
               )
             ]),
@@ -39,6 +38,7 @@ class _FormFieldState extends State<FormCustom> {
 
   void _submitForm() {
     final FormState form = _formKey.currentState;
+    print(values);
     if (form.validate()) {
       form.save();
       print('New user saved with signup data:\n');
