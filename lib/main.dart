@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:personal_financial_management/pages/home.dart';
 import 'package:personal_financial_management/pages/setting-form.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:personal_financial_management/services/firestoreservice.dart';
@@ -63,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 80,
             padding: EdgeInsets.all(16.0),
-            child: SettingForm(),
+            child: Home(),
           ),
         ],
       ),
