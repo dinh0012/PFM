@@ -7,10 +7,13 @@ class InputMoneyField extends StatelessWidget {
   final InputDecoration decoration;
   final initialValue;
   final _controller = TextEditingController();
+
   InputMoneyField({this.onSaved, this.initialValue = '0', this.decoration}) {
+    var value =
+        '${_formatNumber(this.initialValue != null ? this.initialValue : '0'.replaceAll(',', ''))}';
     this._controller.value = TextEditingValue(
-      text: '${_formatNumber(this.initialValue != null ? this.initialValue : '0'.replaceAll(',', ''))}',
-      //selection: TextSelection.collapsed(offset: initialValue?.length),
+      text: value,
+      selection: TextSelection.collapsed(offset: value?.length),
     );
     this.onSaved(initialValue);
   }
