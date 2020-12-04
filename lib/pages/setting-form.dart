@@ -31,8 +31,10 @@ class _SettingFormState extends State<SettingForm> {
     });
   }
 
-  _savedSetting(values) {
-    setting.updateBaseSettingData(values);
+  Future _savedSetting(values) {
+    return setting
+        .updateBaseSettingData(values)
+        .then((value) => Navigator.pop(context));
   }
 
   @override
@@ -41,31 +43,28 @@ class _SettingFormState extends State<SettingForm> {
       child: _progressController
           ? CircularProgressIndicator()
           : FormCustom(
-        initialValues: settingData,
-        onSaved: _savedSetting,
-        children: (values, initialValues) =>
-        [
-          Field(
-              type: FieldType.inputMoney,
-              labelText: 'Lương cố định',
-              name: 'salary',
-              initialValue: initialValues['salary'],
-              onSaved: (salary) {
-                values['salary'] = salary;
-              }),
-          Field(
-              type: FieldType.selection,
-              labelText: 'Chu kỳ lương hàng tháng',
-              initialValue: initialValues['periodSalary'],
-              name: 'periodSalary',
-              items: DateHelper.allDaySelection(),
-              onSaved: (value) {
-                values['periodSalary'] = value;
-              }),
-        ],
-      ),
+              initialValues: settingData,
+              onSaved: _savedSetting,
+              children: (values, initialValues) => [
+                Field(
+                    type: FieldType.inputMoney,
+                    labelText: 'Lương cố định',
+                    name: 'salary',
+                    initialValue: initialValues['salary'],
+                    onSaved: (salary) {
+                      values['salary'] = salary;
+                    }),
+                Field(
+                    type: FieldType.selection,
+                    labelText: 'Chu kỳ lương hàng tháng',
+                    initialValue: initialValues['periodSalary'],
+                    name: 'periodSalary',
+                    items: DateHelper.allDaySelection(),
+                    onSaved: (value) {
+                      values['periodSalary'] = value;
+                    }),
+              ],
+            ),
     );
   }
 }
-
-

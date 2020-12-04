@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:personal_financial_management/widgets/field.dart';
 class FormCustom extends StatefulWidget {
   final Function children ;
-  final Function(Map<String, dynamic>) onSaved ;
+  final Future Function(Map<String, dynamic>)  onSaved ;
   final Map initialValues;
+  final SnackBar snackBar;
 
-  FormCustom({this.children, this.initialValues, this.onSaved });
+  FormCustom({this.children, this.initialValues, this.onSaved, this.snackBar });
 
   @override
   _FormFieldState createState() => _FormFieldState();
@@ -25,12 +26,12 @@ class _FormFieldState extends State<FormCustom> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: [
               ...widget.children(values, initialValues),
-              FlatButton(
-                onPressed: _submitForm,
-                child: Icon(
-                  Icons.access_alarm,
+                ElevatedButton(
+                  child: Text('Save'),
+                  onPressed: _submitForm,
+
+                  //    Icons.access_alarm,
                 ),
-              )
             ]),
       ),
     );
@@ -41,8 +42,14 @@ class _FormFieldState extends State<FormCustom> {
     if (form.validate()) {
       form.save();
       print('New user saved with signup data:\n');
-      widget.onSaved(values);
-      print(values);
+      widget.onSaved(values).then((value) => {
+        if (widget.snackBar == null) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('Đã lưu thành công'),
+            duration: const Duration(seconds: 1),
+          ))
+        }
+      });
     }
   }
 }

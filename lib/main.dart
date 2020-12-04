@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:personal_financial_management/layouts/main.dart';
 import 'package:personal_financial_management/pages/home.dart';
 import 'package:personal_financial_management/pages/setting-form.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:personal_financial_management/services/firestoreservice.dart';
-import 'taskscreen.dart';
 import 'task.dart';
 
 void main() => runApp(MyApp());
@@ -15,12 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter ToDo APP',
+      title: 'PFM',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MainLayout(child: Home(),),
+        '/setting': (context) => MainLayout(child: SettingForm(),),
+      },
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color(0xff543B7A),
-      ),
-      home: MyHomePage(),
     );
   }
 }
@@ -57,18 +58,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Color(0xFFDADDE1),
+
       body: Column(
         children: <Widget>[
           _myAppBar(context),
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 80,
-            padding: EdgeInsets.all(16.0),
+        //  //  decoration: Decoration(background),
             child: Home(),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFFFA7397),
         child: Icon(
           FontAwesomeIcons.listUl,
@@ -83,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fullscreenDialog: true),
           );
         },
-      ),
+      ),*/
     );
   }
 

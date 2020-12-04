@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_financial_management/helpers/color_account.dart';
 import 'package:personal_financial_management/models/account.dart';
 
 class Home extends StatefulWidget {
@@ -30,62 +31,54 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Color> colorsAccount = ColorAccount.colors;
     return Container(
-      child: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(5),
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          crossAxisCount: 2,
-          children: items
-              .map(
-                (item) => Padding(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  child: Container(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      child: Material(
-                        color: Colors.white,
-                        elevation: 14.0,
-                        shadowColor: Color(0x802196F3),
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  '${item.title}',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 10.0),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      '${item.description}',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 10.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      '${item.percent}',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 10.0),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+        child: ListView.builder(
+      itemCount: items.length,
+      padding: EdgeInsets.all(0),
+      itemBuilder: (context, index) => Container(
+        height: (MediaQuery.of(context).size.height - 160) / items.length,
+        child: Padding(
+          padding: EdgeInsets.only(top: 0, bottom: 5),
+          child: Container(
+            color: Colors.white,
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '${items[index].title}',
+                      style: TextStyle(
+                          color: colorsAccount[index], fontSize: 10.0),
                     ),
-                  ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          '${items[index].description}',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${items[index].percent}%',
+                          style: TextStyle(
+                              color: colorsAccount[index],
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-              )
-              .toList()),
-    );
+              ),
+            ),
+          ),
+        ),
+      ),
+    ));
   }
 }
